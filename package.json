@@ -12,6 +12,6 @@
     "express-fileupload": "^1.2.1",
     "express.js": "^1.0.0",
     "firebase": "^9.14.0",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.20"
   }
 }

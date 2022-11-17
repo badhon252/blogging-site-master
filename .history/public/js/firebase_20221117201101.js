@@ -1,5 +1,5 @@
-import { initializeApp } from "./firebase/app";
-import { getFirestore } from "./firebase/firestore/lite";
+// import { initializeApp } from "./firebase/app";
+// import { getFirestore } from "./firebase/firestore/lite";
 // Follow this pattern to import other Firebase services
 // import { } from 'firebase/<service>';
 // import { getFirestore } from "/firebase/firestore";
@@ -19,7 +19,6 @@ let firebaseConfig = {
 
   measurementId: "G-YS4ZCDKKN1",
 };
-
 console.log(firebase);
 firebase.initializeApp(firebaseConfig);
 const db = getFirestore("blogs");

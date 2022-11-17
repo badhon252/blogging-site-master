@@ -19,7 +19,6 @@ let firebaseConfig = {
 
   measurementId: "G-YS4ZCDKKN1",
 };
-
 console.log(firebase);
 firebase.initializeApp(firebaseConfig);
 const db = getFirestore("blogs");

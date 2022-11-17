@@ -35,4 +35,4 @@ const db = getFirestore("blogs");
 //   return cityList;
 // }
 
-// export default db;
+export default db;

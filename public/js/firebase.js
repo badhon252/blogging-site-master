@@ -1,10 +1,10 @@
-import { initializeApp } from "./firebase/app";
-import { getFirestore } from "./firebase/firestore/lite";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 // Follow this pattern to import other Firebase services
 // import { } from 'firebase/<service>';
 // import { getFirestore } from "/firebase/firestore";
 
-let firebaseConfig = {
+let firebaseConfig = initializeApp({
   apiKey: "AIzaSyDLHITpeUbkPkEOfpvXdKr1kGeCO33-kaI",
 
   authDomain: "desi-blogging-website.firebaseapp.com",
@@ -18,21 +18,16 @@ let firebaseConfig = {
   appId: "1:927647131525:web:e5feafc02dbbce7a9086ec",
 
   measurementId: "G-YS4ZCDKKN1",
-};
+});
 
-console.log(firebase);
-firebase.initializeApp(firebaseConfig);
-const db = getFirestore("blogs");
-
-// const app = initializeApp(firebaseConfig);
-// const db = getFirestore(app);
+const db = getFirestore(firebaseConfig);
 
 // Get a list of cities from your database
-// async function getCities(db) {
-//   const citiesCol = collection(db, "cities");
-//   const citySnapshot = await getDocs(citiesCol);
-//   const cityList = citySnapshot.docs.map((doc) => doc.data());
-//   return cityList;
-// }
+export async function getCities(db) {
+  const citiesCol = collection(db, "cities");
+  const citySnapshot = await getDocs(citiesCol);
+  const cityList = citySnapshot.docs.map((doc) => doc.data());
+  return cityList;
+}
 
-// export default db;
+export { db };

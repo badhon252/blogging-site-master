@@ -1,4 +1,8 @@
-// import { db } from "./firebase.js";
+import { db } from "./firebase.js";
+import {
+  doc,
+  setDoc,
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 // console.log(db);
 const blogTitleField = document.querySelector(".title");
 const articleFeild = document.querySelector(".article");
@@ -25,6 +29,7 @@ const uploadImage = (uploadFile, uploadType) => {
     const formdata = new FormData();
     formdata.append("image", file);
 
+    //! there is a problem in here!
     fetch("/upload", {
       method: "post",
       body: formdata,
@@ -67,7 +72,7 @@ let months = [
   "Dec",
 ];
 
-publishBtn.addEventListener("click", () => {
+publishBtn.addEventListener("click", async () => {
   if (articleFeild.value.length && blogTitleField.value.length) {
     // generating id
     let letters = "abcdefghijklmnopqrstuvwxyz";
@@ -82,16 +87,24 @@ publishBtn.addEventListener("click", () => {
     let date = new Date(); // for published at info
 
     //access firstore with db variable;
-    db.collection("blogs")
-      .doc(docName)
-      .set({
-        title: blogTitleField.value,
-        article: articleFeild.value,
-        bannerImage: bannerPath,
-        publishedAt: `${date.getDate()} ${
-          months[date.getMonth()]
-        } ${date.getFullYear()}`,
-      })
+    await setDoc(doc(db, "blogs", docName), {
+      title: blogTitleField.value,
+      article: articleFeild.value,
+      bannerImage: bannerPath,
+      publishedAt: `${date.getDate()} ${
+        months[date.getMonth()]
+      } ${date.getFullYear()}`,
+    })
+      // db.collection("blogs")
+      //   .doc(docName)
+      //   .set({
+      //     title: blogTitleField.value,
+      //     article: articleFeild.value,
+      //     bannerImage: bannerPath,
+      //     publishedAt: `${date.getDate()} ${
+      //       months[date.getMonth()]
+      //     } ${date.getFullYear()}`,
+      //   })
       .then(() => {
         location.href = `/${docName}`;
       })

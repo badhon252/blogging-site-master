@@ -1,18 +1,19 @@
 {
-  "type": "module",
-  "name": "bloggin-site",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server.js",
-  "scripts": {
-    "start": "nodemon server.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express-fileupload": "^1.4.0",
-    "express.js": "^1.0.0",
-    "firebase": "^9.14.0",
-    "nodemon": "^2.0.20"
-  }
+    "type": "module",
+    "name": "bloggin-site",
+    "version": "1.0.0",
+    "description": "I'm building dynamic blog website using HTML, CSS, Vanilla-JavaScript, And use node-express as a server, Google's Firebase as a Database",
+    "main": "server.js",
+    "scripts": {
+        "start": "nodemon server.cjs"
+    },
+    "author": "Khalid Hossain",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.2",
+        "express-fileupload": "^1.4.0",
+        "express.js": "^1.0.0",
+        "firebase": "^9.14.0",
+        "nodemon": "^2.0.20"
+    }
 }

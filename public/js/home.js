@@ -1,47 +1,17 @@
-import { db } from "./firebase";
+import { db } from "./firebase.js";
 import {
-  doc,
-  getDoc,
+  collection,
+  getDocs,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
 const blogSection = document.querySelector(".blogs-section");
-// Google fire base v8
-// db.collection("blogs")
-//   .get()
-//   .then((blogs) => {
-//     blogs.forEach((blog) => {
-//       // console.log(blog);
-//       if (blog.id != decodeURI(location.pathname.split("/").pop())) {
-//         createBlog(blog);
-//       }
-//     });
-//   });
 
-doc(db, "blogs")
-  .getDoc()
-  .then(() => {
-    console.log(doc);
-  });
-
-// Google fire base v9
-// const querySnapshot = await getDocs(collection(db, blogs));
-// querySnapshot.forEach((blog) => {
-//   console.log(blog);
-//   if (blog.id != decodeURI(location.pathname.split("/").pop())) {
-//     createBlog(blog);
-//   }
-// });
 //
 
-//v9
-// const querySnapshot = await getDocs(collection(db, "blogs"));
-// querySnapshot.forEach((blog) => {
-//   if (blog.id != decodeURI(location.pathname.split("/").pop())) {
-//     createBlog(blog);
-//   }
-// });
-//
+const querySnapshot = await getDocs(collection(db, "blogs"));
+console.log(querySnapshot);
 
+//! there is a problem in this function
 const createBlog = (blog) => {
   let data = blog.data();
   blogSection.innerHTML += `
@@ -53,3 +23,13 @@ const createBlog = (blog) => {
     </div>
     `;
 };
+
+querySnapshot.forEach((doc) => {
+  // doc.data() is never undefined for query doc snapshots
+  //?  Object.keys returns an array of a given object's own enumerable property names, iterated in the same order that a normal loop would.
+  //? this helps me to dubuge
+  if (doc.id != decodeURI(location.pathname.split("/").pop())) {
+    console.log(doc.id, " => ", doc.data());
+    createBlog(doc);
+  }
+});

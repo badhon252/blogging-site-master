@@ -1,37 +1,13 @@
-import { db } from "./firebase";
+import { db } from "./firebase.js";
 import {
   doc,
   getDoc,
 } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
 
 let blogId = decodeURI(location.pathname.split("/").pop());
-console.log(blogId);
-// let docRef = db.collection("blogs").doc(blogId);
-// docRef.get().then((doc) => {
-//   if (doc.exists) {
-//     setupBlog(doc.data());
-//   } else {
-//     location.replace("/");
-//   }
-// });
 
 const docRef = doc(db, "blogs", blogId);
 const docSnap = await getDoc(docRef);
-
-docSnap.then((doc) => {
-  if (doc.exists) {
-    console.log(doc);
-    setupBlog(doc.data());
-  } else {
-    location.replace("/");
-  }
-});
-
-// if (docSnap.exists) {
-//   setupBlog(docSnap.data());
-// } else {
-//   location.replace("/");
-// }
 
 const setupBlog = (data) => {
   const banner = document.querySelector(".banner");
@@ -88,3 +64,9 @@ const addArticle = (ele, data) => {
     }
   });
 };
+
+if (docSnap.exists) {
+  setupBlog(docSnap.data());
+} else {
+  location.replace("/");
+}
